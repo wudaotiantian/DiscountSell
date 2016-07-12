@@ -3,14 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="androidas.com.discountsell.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    tools:context="androidas.com.discountsell.MainActivity">
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rg_button"
+        android:orientation="vertical">
+
+    </LinearLayout>
+    <RadioGroup
+        android:id="@+id/rg_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+
+            android:paddingTop="5dp"
+            android:id="@+id/rb_guide"
+            style="@style/CustomRadioButton"
+            android:drawableTop="@drawable/selecter_radio_guide"
+            android:text="首页"
+            android:checked="false" />
+
+        <RadioButton
+            android:paddingTop="5dp"
+            android:id="@+id/rb_hot"
+            style="@style/CustomRadioButton"
+            android:drawableTop="@drawable/selecter_radio_hot"
+            android:text="9.9包邮"
+            android:checked="false" />
+
+        <RadioButton
+            android:paddingTop="5dp"
+            android:id="@+id/rb_classify"
+            style="@style/CustomRadioButton"
+            android:drawableTop="@drawable/selecter_radio_classify"
+            android:text="19.9包邮"
+            android:checked="false" />
+
+        <RadioButton
+            android:paddingTop="5dp"
+            android:id="@+id/rb_my"
+            style="@style/CustomRadioButton"
+            android:drawableTop="@drawable/selecter_radio_my"
+            android:text="品牌特卖"
+            android:checked="false" />
+        <RadioButton
+            android:paddingTop="5dp"
+            android:id="@+id/rb_final"
+            style="@style/CustomRadioButton"
+            android:drawableTop="@drawable/selecter_radio_final"
+            android:text="我的"
+            android:checked="false" />
+    </RadioGroup>
 </RelativeLayout>
