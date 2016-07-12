@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import androidas.com.discountsell.R;
+
 import androidas.com.discountsell.fragment.FirstFragment;
 import androidas.com.discountsell.fragment.FiveFragment;
 import androidas.com.discountsell.fragment.FourFragment;
