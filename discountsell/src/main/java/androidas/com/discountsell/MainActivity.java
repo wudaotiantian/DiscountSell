@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private View view1;
     private LinearLayout vp;
     private LinearLayout frameLayout;
-
+//nihao
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
