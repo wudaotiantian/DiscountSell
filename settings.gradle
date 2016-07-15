@@ -1,1 +1,1 @@
-include ':app', ':discountsell'
+include ':app', ':discountsell', ':mhvp-integrated-ptr', ':mhvp-core', ':demo'

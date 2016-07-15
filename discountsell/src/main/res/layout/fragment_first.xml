@@ -1,13 +1,65 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mhvp_parent"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="androidas.com.discountsell.fragment.FirstFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+<RelativeLayout
+    android:background="#e34a3e"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/logo_imageview"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/index_logo"/>
+
+    <EditText
+        android:enabled="false"
+        android:autoText="true"
+        android:cursorVisible="false"
+        android:drawablePadding="5dp"
+        android:paddingLeft="5dp"
+android:drawableLeft="@drawable/index_icon_search"
+        android:hint="找宝贝"
+        android:textColorHint="#ffffff"
+        android:layout_toLeftOf="@+id/text1"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round_edit"
+        android:id="@+id/search_edittext"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/logo_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <ImageView
+        android:layout_alignParentRight="true"
+
+        android:id="@+id/btn_sign_image"
+        android:layout_width="30dp"
+android:layout_marginRight="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/index_btn_signin"
+       />
+    <TextView
+        android:id="@+id/text1"
+        android:layout_alignParentRight="true"
+        android:textSize="14dp"
+        android:layout_marginRight="5dp"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/btn_sign_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="签到摇奖"/>
+</RelativeLayout>
+
+</LinearLayout>

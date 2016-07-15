@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DiscountSell.iml" filepath="$PROJECT_DIR$/DiscountSell.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/discountsell/discountsell.iml" filepath="$PROJECT_DIR$/discountsell/discountsell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mhvp-core/mhvp-core.iml" filepath="$PROJECT_DIR$/mhvp-core/mhvp-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mhvp-integrated-ptr/mhvp-integrated-ptr.iml" filepath="$PROJECT_DIR$/mhvp-integrated-ptr/mhvp-integrated-ptr.iml" />
     </modules>
   </component>
 </project>

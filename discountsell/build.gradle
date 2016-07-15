@@ -22,6 +22,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile project(':mhvp-core')
+    compile project(':mhvp-integrated-ptr')
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'com.android.support:design:24.0.0'

@@ -10,14 +10,20 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/demo" />
             <option value="$PROJECT_DIR$/discountsell" />
+            <option value="$PROJECT_DIR$/mhvp-core" />
+            <option value="$PROJECT_DIR$/mhvp-integrated-ptr" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/demo" />
             <option value="$PROJECT_DIR$/discountsell" />
+            <option value="$PROJECT_DIR$/mhvp-core" />
+            <option value="$PROJECT_DIR$/mhvp-integrated-ptr" />
           </set>
         </option>
       </GradleProjectSettings>
