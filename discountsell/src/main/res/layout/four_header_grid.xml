@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="#bfbfbf"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></LinearLayout>
+    <LinearLayout
+        android:background="#bfbfbf"
+        android:layout_alignParentLeft="true"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"></LinearLayout>
+
+    <TextView
+        android:textColor="#151515"
+        android:textSize="15sp"
+        android:text="大武汉"
+        android:gravity="center"
+        android:id="@+id/tv_four_header_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center" />
+
+</FrameLayout>
