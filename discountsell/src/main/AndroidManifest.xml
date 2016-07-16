@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".FourClick"></activity>
+        <activity android:name=".FourGridActivity"></activity>
     </application>
 
 </manifest>

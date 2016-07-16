@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#e2e2e2">
+    <LinearLayout
+        android:gravity="center"
+        android:background="#ff0000"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:text="特卖"
+            android:id="@+id/tv_four_title_activity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <GridView
+        android:layout_margin="10dp"
+        android:id="@+id/gv_four_title_activty"
+        android:numColumns="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="2dp"
+        android:scrollbarThumbVertical="@color/colorRed"
+        android:scrollbarStyle="outsideOverlay">
+    </GridView>
+</LinearLayout>

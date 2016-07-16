@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:scaleType="fitXY"
+            android:layout_weight="6"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/iv_four_click_grid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <LinearLayout
+            android:layout_marginBottom="1dp"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:background="#fff"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="[包邮]美浓地大的羊毛大"
+                    android:id="@+id/tv_four_click_grid_title"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#d57707"
+                    android:textSize="14sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:id="@+id/tv_four_click_grid_prom"
+                    android:text="300"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textSize="10sp"
+                    android:textColor="#6e6e6e"
+                    android:layout_weight="5"
+                    android:gravity="center_vertical"
+                    android:id="@+id/tv_four_click_grid_price"
+                    android:text="3000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_commodity_tianmao"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp" />
+                <TextView
+                    android:textSize="10sp"
+                    android:layout_weight="0.5"
+                   android:gravity="center"
+                    android:textColor="#d57707"
+                    android:text="天猫"
+                    android:id="@+id/tv_four_click_grid_tianmao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:background="#fff"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+           <RelativeLayout
+               android:layout_weight="0.7"
+               android:layout_width="0dp"
+               android:layout_height="match_parent">
+               <ImageView
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:src="@drawable/ico_hongbao"
+                   android:layout_width="12dp"
+                   android:layout_height="12dp" />
+
+           </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/ll_four_click_gridview"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_copy_bg_01"
+                    android:layout_width="80dp"
+                    android:layout_height="12dp"
+                    android:id="@+id/imageView" />
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp">
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginLeft="6dp"
+                        android:textSize="8sp"
+                        android:textColor="#fff"
+                        android:text="积分"
+                        android:id="@+id/tv_four_click_grid_integral"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textColor="#d57707"
+                    android:textSize="10sp"
+                    android:text=" +额外红包"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

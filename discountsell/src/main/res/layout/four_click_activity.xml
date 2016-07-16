@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <RelativeLayout
-
         android:background="#ff0000"
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -34,10 +33,12 @@
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
     <LinearLayout
+        android:background="#fff"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-        <TextView
+        <Button
+            android:background="#fff"
             android:text="推荐"
             android:gravity="center"
             android:layout_weight="1"
@@ -47,7 +48,8 @@
             android:background="#bfbfbf"
             android:layout_width="1dp"
             android:layout_height="30dp" />
-        <TextView
+        <Button
+            android:background="#fff"
             android:text="销量"
             android:gravity="center"
             android:layout_weight="1"
@@ -57,7 +59,8 @@
             android:background="#bfbfbf"
             android:layout_width="1dp"
             android:layout_height="30dp" />
-        <TextView
+        <Button
+            android:background="#fff"
             android:text="价格"
             android:gravity="center"
             android:layout_weight="1"
@@ -67,7 +70,8 @@
             android:background="#bfbfbf"
             android:layout_width="1dp"
             android:layout_height="30dp" />
-        <TextView
+        <Button
+            android:background="#fff"
             android:text="折扣"
             android:gravity="center"
             android:layout_weight="1"
@@ -77,17 +81,19 @@
             android:background="#bfbfbf"
             android:layout_width="1dp"
             android:layout_height="30dp" />
-        <TextView
+        <Button
+            android:background="#fff"
             android:text="最新"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </LinearLayout>
-    <androidas.com.discountsell.canstant.MyGridView
+    <GridView
+        android:layout_margin="10dp"
         android:id="@+id/gv_four_click_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2">
-    </androidas.com.discountsell.canstant.MyGridView>
+    </GridView>
 </LinearLayout>
