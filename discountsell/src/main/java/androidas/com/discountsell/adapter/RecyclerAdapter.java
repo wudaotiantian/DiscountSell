@@ -32,7 +32,7 @@ import androidas.com.discountsell.fragment.FourFragment;
 /**
  * Created by xwb on 2016/7/12.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolderV> {
     public TextView textTitle;
     public TextView textDiscount;
     public TextView textNumble;
@@ -63,18 +63,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolderV onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType==HEADER_VIEW){
             View view=LayoutInflater.from(mContext).inflate(R.layout.four_header_item,parent,false);
-            return new MyViewHolder(view);
+            return new MyViewHolderV(view);
         }
 
         View view=LayoutInflater.from(mContext).inflate(R.layout.four_fangment_item,parent,false);
-        return new MyViewHolder(view);
+        return new MyViewHolderV(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolderV holder, int position) {
         if(position==HEADER_VIEW){
             HeaderAdapterV headerAdapterV=new HeaderAdapterV(mContext,mTitle);
             holder.myGridView.setAdapter(headerAdapterV);
@@ -168,7 +168,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
         return items.size()+1;
     }
 }
-class MyViewHolder extends RecyclerView.ViewHolder {
+class MyViewHolderV extends RecyclerView.ViewHolder {
     public TextView textTitle;
     public TextView textDiscount;
     public TextView textNumble;
@@ -187,7 +187,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     public TextView textRightPrice;
     public TextView textRightProm;
 
-    public MyViewHolder(View itemView) {
+    public MyViewHolderV(View itemView) {
         super(itemView);
         textTitle= (TextView) itemView.findViewById(R.id.tv_four_item_title);
         textDiscount= (TextView) itemView.findViewById(R.id.tv_four_item_discount);

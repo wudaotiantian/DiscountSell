@@ -20,6 +20,7 @@ public class FourClick extends AppCompatActivity{
 
     private void intiView() {
         GridView gridView= (GridView) findViewById(R.id.gv_four_click_activity);
+
     }
 
 }
