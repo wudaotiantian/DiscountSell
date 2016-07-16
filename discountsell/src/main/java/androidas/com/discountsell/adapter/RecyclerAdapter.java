@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidas.com.discountsell.FourClick;
+import androidas.com.discountsell.FourGridActivity;
 import androidas.com.discountsell.MainActivity;
 import androidas.com.discountsell.R;
 import androidas.com.discountsell.bean.BeanSale;
@@ -101,6 +102,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
         getClick(holder.imageLeft,position-1,numl=1);
         getClick(holder.imageContent,position-1,numl=2);
         getClick(holder.imageRight,position-1,numl=3);
+        getClick(holder.linearLayoutTitle,position-1,numl=4);
+        getClick(holder.linearLayoutBottom,position-1,numl=5);
 
     }
     public void getClick(View view, final int num,final int numl){
@@ -108,6 +111,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                Intent mIntent=new Intent(mContext, FourGridActivity.class);
+                mIntent.putExtra("myTitle",items.get(num).getTitle());
+                mIntent.putExtra("myTid",items.get(num).getTid());
+
                 switch (numl){
                     case 1:
 
@@ -124,10 +131,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
                         mContext.startActivity(intent);
                         break;
                     case 4:
+                        mContext.startActivity(mIntent);
 
                         break;
                     case 5:
 
+                        mContext.startActivity(mIntent);
                         break;
                     default:
                         break;
