@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,15 @@ import android.widget.BaseAdapter;
 import com.culiu.mhvp.core.InnerListView;
 import com.culiu.mhvp.core.InnerScroller;
 import com.culiu.mhvp.core.MagicHeaderUtils;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 import androidas.com.discountsell.R;
+import androidas.com.discountsell.bean.FirstPageBean;
+import androidas.com.discountsell.constants.UrlData;
+import androidas.com.discountsell.httplibrary.IOKCallBack;
+import androidas.com.discountsell.httplibrary.OkHttpTool;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,7 +74,7 @@ public class ListFragment extends AbsDemoFragment {
 
         // Two ways to load data: 1. initAdapter();  then notifyDataSetChanged(); 2. requestData(); then initAdapter();
         // demonstrate the 2nd way
-        requestData();
+       requestData();
 
         return viewThis;
     }
@@ -79,7 +85,7 @@ public class ListFragment extends AbsDemoFragment {
     /***********************     Test data      ***********************/
 
     protected ArrayList<Item> mListItems;
-
+    protected ArrayList<FirstPageBean.DataBean.IndexHomeBean.ListBean> mListSomes;
     public class Item {
         private String title;
         private int drawableResId;
@@ -115,13 +121,24 @@ public class ListFragment extends AbsDemoFragment {
     }
 
     public void onResponse() {
-//        if(getActivity() == null || getActivity().isFinishing()) {
-//            return;
-//        }
+
+        if(getActivity() == null || getActivity().isFinishing()) {
+            return;
+        }
 //
-//        if (mListItems == null) {
-//            mListItems = new ArrayList<Item>();
-//        }
+        if (mListSomes == null) {
+            mListSomes = new ArrayList<>();
+       }
+        OkHttpTool.newInstance().start(UrlData.FIRSTPAGE_URL+1).callback(new IOKCallBack() {
+            @Override
+            public void success(String result) {
+                Gson gson = new Gson();
+                FirstPageBean bean = gson.fromJson(result,FirstPageBean.class);
+                mListSomes.addAll(bean.getData().getIndex_home().getList());
+                Log.i("tag1", "success: "+mListSomes);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
 //        for (int i = 1; i <= 15; i++) {
 //            mListItems.add(new Item("list: " + (mIndex + 1) + "'s  item  " + i, RandomPic.getInstance().getPicResId()));
 //        }
@@ -131,8 +148,8 @@ public class ListFragment extends AbsDemoFragment {
 
 
     protected void initAdapter() {
-        if (mListItems == null) {
-            mListItems = new ArrayList<Item>();
+        if (mListSomes == null) {
+            mListSomes = new ArrayList<>();
         }
 
         mAdapter = new BaseAdapter(
@@ -140,12 +157,12 @@ public class ListFragment extends AbsDemoFragment {
         ) {
             @Override
             public int getCount() {
-                return mListItems.size();
+                return mListSomes.size();
             }
 
             @Override
-            public Item getItem(int position) {
-                return mListItems.get(position);
+            public FirstPageBean.DataBean.IndexHomeBean.ListBean getItem(int position) {
+                return mListSomes.get(position);
             }
 
             @Override

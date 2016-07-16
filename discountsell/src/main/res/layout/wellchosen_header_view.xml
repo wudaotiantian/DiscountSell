@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/first_fragment_header_ll"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:layout_weight="3">
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/header_view_cb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
+
+    <GridView
+
+        android:numColumns="4"
+        android:id="@+id/header_view_gv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
+    <HorizontalScrollView
+        android:scrollbars="none"
+        android:id="@+id/header_view_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></HorizontalScrollView>
+</LinearLayout>
+
+
+</LinearLayout>

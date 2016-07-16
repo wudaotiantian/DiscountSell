@@ -49,7 +49,7 @@ public abstract class AbsDemoFragment extends Fragment implements InnerScrollerC
             public void run() {
                 onResponse();
             }
-        }, 1500);
+        },1);
     }
 
     public abstract void onResponse();

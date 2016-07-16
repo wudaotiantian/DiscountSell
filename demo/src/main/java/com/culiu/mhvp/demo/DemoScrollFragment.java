@@ -27,6 +27,7 @@ public class DemoScrollFragment extends AbsDemoFragment {
      * TODO: make sure through this method, can get your InnerScroller(InnerListView) in your fragment.
      * @return
      */
+
     @Override
     public InnerScroller getInnerScroller() {
         return mScrollView;
@@ -38,6 +39,7 @@ public class DemoScrollFragment extends AbsDemoFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mScrollView != null && viewThis != null) {
             if (viewThis.getParent() != null) {
+
                 ((ViewGroup) viewThis.getParent()).removeView(viewThis);
             }
             return viewThis;
