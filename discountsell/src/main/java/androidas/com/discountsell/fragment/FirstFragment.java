@@ -235,7 +235,7 @@ GridView gridView;
 //                        intent.putExtra("title",imageDatas.get(position).getTarget().getTitle());
 //                        startActivity(intent);
 
-
+//
                 });
 
             }
