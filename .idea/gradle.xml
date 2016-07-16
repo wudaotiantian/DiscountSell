@@ -5,19 +5,25 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="H:\Program Files\Android\Android Studio\gradle\gradle-2.10" />
+        <option name="gradleHome" value="F:\develop\android-studio-ide-143.2739321-windows\android-studio\gradle\gradle-2.10" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/demo" />
             <option value="$PROJECT_DIR$/discountsell" />
+            <option value="$PROJECT_DIR$/mhvp-core" />
+            <option value="$PROJECT_DIR$/mhvp-integrated-ptr" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/demo" />
             <option value="$PROJECT_DIR$/discountsell" />
+            <option value="$PROJECT_DIR$/mhvp-core" />
+            <option value="$PROJECT_DIR$/mhvp-integrated-ptr" />
           </set>
         </option>
       </GradleProjectSettings>

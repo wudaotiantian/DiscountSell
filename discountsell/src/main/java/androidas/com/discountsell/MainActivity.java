@@ -4,10 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
 
 import androidas.com.discountsell.fragment.FirstFragment;
 import androidas.com.discountsell.fragment.FiveFragment;
@@ -42,6 +47,23 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         manager = getSupportFragmentManager();
         RadioButton childAt = (RadioButton) rgp.getChildAt(0);
         childAt.setChecked(true);
+        HashMap<String, String> stringStringHashMap = new HashMap<>();
+        stringStringHashMap.put("keyword","一");
+//        OkHttpTool.newInstance().start("http://app.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=search_goods_list").post(stringStringHashMap).callback(new IOKCallBack() {
+//            @Override
+//            public void success(String result) {
+//                Log.i("tagre", "success: "+result);
+//            }
+//        });
+
+        try {
+            String encode = URLEncoder.encode("夏季童装", "UTF-8");
+                         Log.i("tagre", "success: "+encode);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
