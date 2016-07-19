@@ -49,25 +49,34 @@ public class UtlConfig {
 //首页—女装—半身裙—最新：
 
 //9.9包邮—销量：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=volume&sort=desc&picsize=
+    public static final String SECOND_PAGE_SELLCOUNT_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=volume&sort=desc&picsize=";
 //9.9包邮—价格：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=promotion_price&sort=asc&picsize=
-//usb分线器一拖四0.25m：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=type_goods_list&type_num=29&page=1&sort_name=&sort=desc&picsize=
+    public static final String SECOND_PAGE_PRICE_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=promotion_price&sort=asc&picsize=";
+    //usb分线器一拖四0.25m：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=type_goods_list&type_num=29&page=1&sort_name=&sort=desc&picsize=
 //9.9包邮—折扣：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=discount&sort=asc&picsize=
-//9.9包邮—最新：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=time&sort=desc&picsize=
-//9.9包邮—推荐：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=&sort=desc&picsize=
+    public static final String SECOND_PAGE_REBATE_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=discount&sort=asc&picsize=";
+    //9.9包邮—最新：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=time&sort=desc&picsize=
+    public static final String SECOND_PAGE_NEWEST_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=time&sort=desc&picsize=";
+    //9.9包邮—推荐：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=&sort=desc&picsize=
+    public static final String SECOND_PAGE_RECOMMEND_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=4&page=1&type_num=all_type_goods&sort_name=&sort=desc&picsize=";
 
 //19.9包邮—推荐:http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=&sort=desc&picsize=
+    public static final String THIRD_PAGE_RECOMMEND_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=&sort=desc&picsize=";
 //19.9包邮—销量：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=volume&sort=desc&picsize=
+    public static final String THIRD_PAGE_SELLCOUNT_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=volume&sort=desc&picsize=";
 //19.9包邮—价格：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=promotion_price&sort=asc&picsize=
+    public static final String THIRD_PAGE_PRICE_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=promotion_price&sort=asc&picsize=";
 //19.9包邮—折扣：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=discount&sort=asc&picsize=
+    public static final String THIRD_PAGE_REBATE_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=discount&sort=asc&picsize=";
 //19.9包邮——最新：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=time&sort=desc&picsize=
-
+    public static final String THIRD_PAGE_NEWEST_URL="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=5&page=1&type_num=all_type_goods&sort_name=time&sort=desc&picsize=";
 //品牌特卖：
 public static final String URL_SALE="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=brand_goods&brand_page=1&picsize=";
 
 //品牌特卖—全部—推荐：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=all_type_goods&sort_name=&sort=desc&picsize=
 //品牌特卖—全部—销量：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=all_type_goods&sort_name=volume&sort=desc&picsize=
 //品牌特卖—全部—价格：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=all_type_goods&sort_name=promotion_price&sort=asc&picsize=
-//牌牌特卖—全部—折扣：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=all_type_goods&sort_name=discount&sort=asc&picsize=
+//牌牌特卖—全部—折扣：htp:/t/appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=all_type_goods&sort_name=discount&sort=asc&picsize=
 //品牌特卖—全部—最新：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=all_type_goods&sort_name=time&sort=desc&picsize=
 
 //品牌特卖—女装—推荐：http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=27&sort_name=&sort=desc&picsize=

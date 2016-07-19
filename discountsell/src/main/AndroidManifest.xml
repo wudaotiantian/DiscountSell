@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".FourClick"></activity>
         <activity android:name=".FourGridActivity"></activity>
-    </application>
 
+        <activity android:name=".DetailsActivity"/>
+    </application>
 </manifest>
