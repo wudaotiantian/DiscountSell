@@ -375,6 +375,15 @@ public class FirstPageBean {
                 private String id;
                 private String app_picurl;
                 private String title;
+private int imageRes;
+
+                public int getImageRes() {
+                    return imageRes;
+                }
+
+                public void setImageRes(int imageRes) {
+                    this.imageRes = imageRes;
+                }
 
                 public String getId() {
                     return id;

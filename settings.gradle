@@ -1,1 +1,1 @@
-include ':app', ':discountsell', ':mhvp-integrated-ptr', ':mhvp-core', ':demo'
+include ':app', ':discountsell', ':mhvp-integrated-ptr', ':mhvp-core', ':demo', ':app1', ':FlycoTabLayout_Lib', ':myapplication'
