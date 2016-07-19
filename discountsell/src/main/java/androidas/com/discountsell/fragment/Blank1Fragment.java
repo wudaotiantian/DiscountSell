@@ -63,8 +63,8 @@ public class Blank1Fragment extends ListFragment {
                 ImageView iv2 = (ImageView) convertView.findViewById(R.id.icon_taobao_tianmao_imageview);
                 View line = (View)convertView.findViewById(R.id.small_price_line);
                 tv1.setText(mListSomes.get(position).getTitle());
-                tv2.setText(mListSomes.get(position).getPromotion_price()+"");
-                tv3.setText(mListSomes.get(position).getPrice()+"");
+                tv2.setText(getNewNamble(mListSomes.get(position).getPromotion_price())+"");
+                tv3.setText(getNewNamble(mListSomes.get(position).getPrice())+"");
                 tv5.setText(mListSomes.get(position).getCommission_cent()+"");
                 if(mListSomes.get(position).getApp_isrec().equals("1")){
                         relativeLayout.setVisibility(View.VISIBLE);
@@ -96,6 +96,18 @@ public class Blank1Fragment extends ListFragment {
         };
         ((GridViewWithHeaderBaseAdapter) mAdapter).setNumColumns(2);
         mListView.setAdapter(mAdapter);
+    }
+    public String getNewNamble(double namble){
+        String newNamble = null;
+        String s = String.valueOf(namble);
+
+        if(s.substring(s.indexOf(".")+1,s.indexOf(".")+2).equals("0")){
+            Log.i("xxxx",""+s.indexOf("."));
+            newNamble = s.substring(0,s.indexOf("."));
+        }else {
+            newNamble=s.substring(0,s.indexOf(".")+2);
+        }
+        return newNamble;
     }
 
 //    @Override

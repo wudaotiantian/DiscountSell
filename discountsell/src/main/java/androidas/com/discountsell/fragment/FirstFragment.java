@@ -2,6 +2,7 @@ package androidas.com.discountsell.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -31,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidas.com.discountsell.R;
+import androidas.com.discountsell.activity.JumpActivity;
 import androidas.com.discountsell.adapter.DemoPagerAdapter;
 import androidas.com.discountsell.bean.FirstPageBean;
 import androidas.com.discountsell.constants.UrlData;
@@ -57,7 +62,11 @@ private List<FirstPageBean.DataBean.IndexBannerBean.ListBean> imageDatas = new A
     private View customLayout;
     private HeaderViewHolder headerViewHolder;
 
-
+private List<FirstPageBean.DataBean.IndexTypeBean.ListBean> gridList = new ArrayList<>();
+    private HotAdapter hotAdapter;
+    private String[] mImgIds;
+    private LinearLayout mGallery;
+private int i;
     public FirstFragment() {
         // Required empty public constructor
         //woejdhf
@@ -155,6 +164,20 @@ private List<FirstPageBean.DataBean.IndexBannerBean.ListBean> imageDatas = new A
 
         return view;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        //开始自动滚动
+        headerViewHolder.convenientBanner.startTurning(2000);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //停止滚动
+        headerViewHolder.convenientBanner.stopTurning();
+    }
+
 
     private void  setupHeaderView() {
 //        ImageView iv = new ImageView(getContext());
@@ -172,12 +195,91 @@ private List<FirstPageBean.DataBean.IndexBannerBean.ListBean> imageDatas = new A
         //customLayout.setMinimumHeight(1/3);
         loadBannerDatas();//动态加载数据
         setupBanner(headerViewHolder);
+        loadGridDatas();
+ hotAdapter = new HotAdapter(gridList);
+        headerViewHolder.gridView.setHorizontalSpacing(1);
+        headerViewHolder.gridView.setVerticalSpacing(1);
+
+headerViewHolder.gridView.setAdapter(hotAdapter);
+        headerViewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getContext(), JumpActivity.class);
+                String title = gridList.get(i).getTitle();
+                String id = gridList.get(i).getId();
+
+                intent.putExtra("key",title);
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
+        Log.i("tagada", "setupHeaderView: "+headerViewHolder.gridView);
+
+mImgIds = new String[]{"夏季童装","新款女包","沙滩裤","牛仔短裤","风扇","雪纺衫","泳衣","凉席","防晒霜","遮阳帽","连衣裙","凉鞋","背心"};
+        mGallery = (LinearLayout) customLayout.findViewById(R.id.id_gallery);
+
+        for (int i = 0; i < mImgIds.length; i++)
+        {
+
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_index_gallery_item,
+                  mGallery, false);
+//            ImageView img = (ImageView) view
+//                    .findViewById(R.id.id_index_gallery_item_image);
+//            img.setImageResource(mImgIds[i]);
+//            TextView txt = (TextView) view
+//                    .findViewById(R.id.id_index_gallery_item_text);
+//            txt.setText("some info ");
+            TextView textView = (TextView) view.findViewById(R.id.gallery_textview);
+            textView.setText(mImgIds[i]);
+            final int finalI = i;
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(),mImgIds[finalI],Toast.LENGTH_SHORT).show();
 
 
 
-        mMagicHeaderViewPager.addHeaderView(customLayout,screenHeight);
+                }
+            });
+            mGallery.addView(view);
+
+        }
+
+        mMagicHeaderViewPager.addHeaderView(customLayout,screenHeight/3);
 
     }
+    public String getNewNamble(double namble){
+        String newNamble = null;
+        String s = String.valueOf(namble);
+
+        if(s.substring(s.indexOf(".")+1,s.indexOf(".")+2).equals("0")){
+            Log.i("xxxx",""+s.indexOf("."));
+            newNamble = s.substring(0,s.indexOf("."));
+        }else {
+            newNamble=s.substring(0,s.indexOf(".")+2);
+        }
+        return newNamble;
+    }
+
+    private void loadGridDatas() {
+   OkHttpTool.newInstance().start(UrlData.FIRSTPAGE_URL+1).callback(new IOKCallBack() {
+       @Override
+       public void success(String result) {
+           Gson gson = new Gson();
+           FirstPageBean bean = gson.fromJson(result,FirstPageBean.class);
+           gridList.addAll(bean.getData().getIndex_type().getList());
+            FirstPageBean.DataBean.IndexTypeBean.ListBean newBean = new FirstPageBean.DataBean.IndexTypeBean.ListBean();
+           newBean.setTitle("更多");
+           newBean.setApp_picurl("http://imgsrc.baidu.com/forum/w%3D580/sign=d032268e0246f21fc9345e5bc6256b31/bd034f4a20a446230e0fcd179022720e0df3d79b.jpg");
+           gridList.add(newBean);
+           hotAdapter.notifyDataSetChanged();
+       }
+   });
+
+
+
+    }
+
     class HeaderViewHolder {
 
         //@BindView(R.id.header_view_rv)
@@ -190,6 +292,7 @@ GridView gridView;
             convenientBanner = (ConvenientBanner) headerView.findViewById(R.id.header_view_cb);
              gridView = (GridView) headerView.findViewById(R.id.header_view_gv);
             horizontalScrollView = (HorizontalScrollView) headerView.findViewById(R.id.header_view_rv);
+
         }
     }
     private void loadBannerDatas() {
@@ -275,7 +378,95 @@ GridView gridView;
 //            imageView.setImageResource(data.getImage_url());
                     Glide.with(getContext()).load(data.getApp_subject_indexpic()).into(imageView);
                 }
-            }
 
+            }
+    //创建ViewHolder
+    class GridViewHolder  {
+        public ImageView imageView;
+        public TextView textView;
+        public GridViewHolder(View itemView) {
+
+            imageView = (ImageView) itemView.findViewById(R.id.grid_item_imageview);
+            Log.i("tagitem", "getView:++++ "+imageView);
+
+            textView= (TextView) itemView.findViewById(R.id.grid_item_textview);
 
         }
+    }
+    class HotAdapter extends BaseAdapter {
+        private List<FirstPageBean.DataBean.IndexTypeBean.ListBean> itemsBeen;
+        //private Context context;
+
+        public HotAdapter(List<FirstPageBean.DataBean.IndexTypeBean.ListBean> itemsBeen) {
+            this.itemsBeen = itemsBeen;
+            //this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            return itemsBeen == null ? 0 : itemsBeen.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = convertView;
+            GridViewHolder viewHodler = null;
+            if (view == null) {
+                view = LayoutInflater.from(getContext()).inflate(R.layout.gridview_image_text_item, parent,false);
+                //ImageView imageview = (ImageView) view.findViewById(R.id.grid_item_imageview);
+               // Log.i("tagitem", "getView: "+imageview);
+
+
+                viewHodler = new GridViewHolder(view);
+                view.setTag(viewHodler);
+            } else {
+                viewHodler = (GridViewHolder) view.getTag();
+            }
+//            if(position==(getCount()-1)){
+//                viewHodler.textView.setText("更多");
+//                viewHodler.imageView.setImageResource(R.drawable.icon_more);
+//            }
+          //  if(position<=itemsBeen.size()) {
+               // Log.i("tagee", "getView: "+position+""+itemsBeen.size());
+                FirstPageBean.DataBean.IndexTypeBean.ListBean items0 = itemsBeen.get(position);
+                Log.i("tagpo", "getView: "+position);
+                viewHodler.textView.setText(items0.getTitle());
+                Log.i("tagee", "getView: "+itemsBeen.size());
+
+                Glide.with(getContext()).load(items0.getApp_picurl()).into(viewHodler.imageView);
+
+
+//            FirstPageBean.DataBean.IndexTypeBean.ListBean items7 = itemsBeen.get(7);
+//            // Log.i("tagitem", "getView: "+items.getTitle());
+//            viewHodler.textView.setText(items7.getTitle());
+//            Log.i("tagee", "getView: "+itemsBeen.size());
+//
+//            Glide.with(getContext()).load(items7.getApp_picurl()).into(viewHodler.imageView);
+
+
+//            }else{
+//                viewHodler.textView.setText("更多");
+//                viewHodler.imageView.setImageResource(R.drawable.icon_more);
+//
+//            }
+//
+//
+// Hot.DataBean.ItemsBean items = itemsBeen.get(position);
+//            viewHodler.description.setText(items.getData().getName());
+//            String url = items.getData().getCover_image_url();
+//            Picasso.with(context).load(url).into(viewHodler.iv);
+            return view;
+        }
+
+
+    }  }
