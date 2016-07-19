@@ -189,7 +189,7 @@
                 android:background="#ff0000"
                 android:textColor="#fff"
                 android:layout_width="45dp"
-                android:layout_height="30dp" />
+                android:layout_height="26dp" />
         </LinearLayout>
         <TextView
             android:textSize="15sp"

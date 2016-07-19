@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidas.com.discountsell.FourClick;
+import androidas.com.discountsell.FourDetailsActivity;
 import androidas.com.discountsell.FourGridActivity;
 import androidas.com.discountsell.MainActivity;
 import androidas.com.discountsell.R;
@@ -43,6 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolderV> {
     public ImageView imageRight;
     public Context mContext;
     private BeanSale mBeanSale;
+    private String[]tId={"all_type_goods","27","29","11","26","14","12","8","10","13","33","32"};
     private List<BeanSale.DataBean.ListBeanV> items=new ArrayList<>();
     private List<String> mTitle=new ArrayList<>();
     public static final int HEADER_VIEW = 0;
@@ -78,6 +81,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolderV> {
         if(position==HEADER_VIEW){
             HeaderAdapterV headerAdapterV=new HeaderAdapterV(mContext,mTitle);
             holder.myGridView.setAdapter(headerAdapterV);
+            holder.myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent=new Intent(mContext,FourClick.class);
+                    intent.putExtra("myKey",mTitle.get(i));
+                    intent.putExtra("myId",tId[i]);
+                    mContext.startActivity(intent);
+                }
+            });
             return;
         }
         Glide.with(mContext).load(items.get(position-1).getBrand_logo()).into(holder.imageTitle);
@@ -110,24 +122,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<MyViewHolderV> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Intent intent = new Intent(mContext, FourDetailsActivity.class);
+
                 Intent mIntent=new Intent(mContext, FourGridActivity.class);
                 mIntent.putExtra("myTitle",items.get(num).getTitle());
                 mIntent.putExtra("myTid",items.get(num).getTid());
 
                 switch (numl){
                     case 1:
-
-                        intent.setData(Uri.parse(items.get(num).getGoods_list().getList().get(0).getPro_url()));
+                        intent.putExtra("path",items.get(num).getGoods_list().getList().get(0).getPro_url());
                         mContext.startActivity(intent);
                         break;
                     case 2:
-                        intent.setData(Uri.parse(items.get(num).getGoods_list().getList().get(1).getPro_url()));
+                        intent.putExtra("path",items.get(num).getGoods_list().getList().get(1).getPro_url());
                         mContext.startActivity(intent);
                         break;
                     case 3:
 
-                        intent.setData(Uri.parse(items.get(num).getGoods_list().getList().get(2).getPro_url()));
+                        intent.putExtra("path",items.get(num).getGoods_list().getList().get(2).getPro_url());
                         mContext.startActivity(intent);
                         break;
                     case 4:

@@ -9,7 +9,7 @@
         android:layout_height="40dp">
         <ImageView
             android:src="@mipmap/ic_launcher"
-            android:id="@+id/iv_four_click_title"
+            android:id="@+id/iv_four_click_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/textView" />
+            android:id="@+id/tv_four_click_title" />
         <ImageView
             android:src="@mipmap/ic_launcher"
             android:id="@+id/iv_four_click_check"
@@ -32,68 +32,90 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
-    <LinearLayout
-        android:background="#fff"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <Button
-            android:background="#fff"
-            android:text="推荐"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <TextView
-            android:background="#bfbfbf"
-            android:layout_width="1dp"
-            android:layout_height="30dp" />
-        <Button
-            android:background="#fff"
-            android:text="销量"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <TextView
-            android:background="#bfbfbf"
-            android:layout_width="1dp"
-            android:layout_height="30dp" />
-        <Button
-            android:background="#fff"
-            android:text="价格"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <TextView
-            android:background="#bfbfbf"
-            android:layout_width="1dp"
-            android:layout_height="30dp" />
-        <Button
-            android:background="#fff"
-            android:text="折扣"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <TextView
-            android:background="#bfbfbf"
-            android:layout_width="1dp"
-            android:layout_height="30dp" />
-        <Button
-            android:background="#fff"
-            android:text="最新"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <GridView
-        android:layout_margin="10dp"
-        android:id="@+id/gv_four_click_activity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="2">
-    </GridView>
+      <RadioGroup
+          android:id="@+id/rg_four_click_activity"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_width="match_parent"
+          android:layout_height="50dp">
+          <RadioButton
+              android:gravity="center"
+              android:button="@null"
+              android:onClick="onClick"
+              android:id="@+id/bt_four_click_recomment"
+              android:text="推荐"
+              android:textColor="@color/selecter_radio_textcolor"
+              android:layout_weight="1"
+              android:background="#fff"
+              android:layout_width="0dp"
+              android:layout_height="match_parent" />
+          <RelativeLayout
+              android:background="#bfbfbf"
+              android:layout_width="2dp"
+              android:layout_height="25dp"></RelativeLayout>
+          <RadioButton
+              android:onClick="onClick"
+              android:gravity="center"
+              android:button="@null"
+              android:id="@+id/bt_four_click_sales"
+              android:text="销量"
+              android:textColor="@color/selecter_radio_textcolor"
+              android:layout_weight="1"
+              android:background="#fff"
+              android:layout_width="0dp"
+              android:layout_height="match_parent" />
+          <RelativeLayout
+              android:background="#bfbfbf"
+              android:layout_width="2dp"
+              android:layout_height="25dp"></RelativeLayout>
+          <RadioButton
+              android:drawableRight="@drawable/ass"
+              android:onClick="onClick"
+              android:gravity="center"
+              android:button="@null"
+              android:id="@+id/bt_four_click_price"
+              android:padding="10dp"
+              android:text="价格"
+              android:textColor="@color/selecter_radio_textcolor"
+              android:layout_weight="1"
+              android:background="#fff"
+              android:layout_width="0dp"
+              android:layout_height="match_parent" />
+          <RelativeLayout
+              android:background="#bfbfbf"
+              android:layout_width="2dp"
+              android:layout_height="25dp"></RelativeLayout>
+          <RadioButton
+              android:onClick="onClick"
+              android:gravity="center"
+              android:button="@null"
+              android:id="@+id/bt_four_click_discount"
+              android:text="折扣"
+              android:textColor="@color/selecter_radio_textcolor"
+              android:layout_weight="1"
+              android:background="#fff"
+              android:layout_width="0dp"
+              android:layout_height="match_parent" />
+          <RelativeLayout
+              android:background="#bfbfbf"
+              android:layout_width="2dp"
+              android:layout_height="25dp"></RelativeLayout>
+          <RadioButton
+              android:onClick="onClick"
+              android:gravity="center"
+              android:button="@null"
+              android:id="@+id/bt_four_click_newest"
+              android:text="最新"
+              android:textColor="@color/selecter_radio_textcolor"
+              android:layout_weight="1"
+              android:background="#fff"
+              android:layout_width="0dp"
+              android:layout_height="match_parent" />
+
+      </RadioGroup>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_four_click_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

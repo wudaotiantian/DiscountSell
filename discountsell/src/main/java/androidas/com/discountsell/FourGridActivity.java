@@ -1,6 +1,5 @@
 package androidas.com.discountsell;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,11 +13,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidas.com.discountsell.adapter.TitleAdapter;
+import androidas.com.discountsell.adapter.GridAdapter;
 import androidas.com.discountsell.bean.BeadTitle;
-import androidas.com.discountsell.bean.BeanSale;
-import androidas.com.discountsell.canstant.MyGridView;
-import androidas.com.discountsell.canstant.UtlConfig;
 import androidas.com.discountsell.httplibrary.IOKCallBack;
 import androidas.com.discountsell.httplibrary.OkHttpTool;
 
@@ -33,7 +29,7 @@ public class FourGridActivity extends AppCompatActivity{
     private List<BeadTitle.DataBean.ListBeanV.ProductsBean.ListBean> listBeen=new ArrayList<>();
     private GridView myGridView;
     private TextView textView;
-    private TitleAdapter titleAdapter;
+    private GridAdapter gridAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,16 +62,16 @@ public class FourGridActivity extends AppCompatActivity{
                 listBeen.addAll(beadTitle.getData().getListV().getProducts().getList());
                 Log.i("xxmmmmm",""+beadTitle.getData().getListV().getProducts().getList());
                 listBeen.size();
-                titleAdapter.notifyDataSetChanged();
+                gridAdapter.notifyDataSetChanged();
 
             }
         });
     }
     public void iniAdapter(){
-        titleAdapter=new TitleAdapter(listBeen,FourGridActivity.this);
+        gridAdapter =new GridAdapter(listBeen,FourGridActivity.this);
     }
     public void binAdapter(){
-        myGridView.setAdapter(titleAdapter);
+        myGridView.setAdapter(gridAdapter);
     }
 
 }

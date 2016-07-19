@@ -21,11 +21,11 @@ import androidas.com.discountsell.bean.BeadTitle;
 /**
  * Created by xwb on 2016/7/15.
  */
-public class TitleAdapter extends BaseAdapter {
+public class GridAdapter extends BaseAdapter {
     private List<BeadTitle.DataBean.ListBeanV.ProductsBean.ListBean> beanList=new ArrayList<>();
     private Context mContext;
     private LayoutInflater layoutInflater;
-    public TitleAdapter(List<BeadTitle.DataBean.ListBeanV.ProductsBean.ListBean> beanList, Context mContext) {
+    public GridAdapter(List<BeadTitle.DataBean.ListBeanV.ProductsBean.ListBean> beanList, Context mContext) {
         this.beanList = beanList;
         this.mContext = mContext;
         layoutInflater=LayoutInflater.from(mContext);
