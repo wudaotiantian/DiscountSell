@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 /**
  * Created by my on 2016/7/18.
@@ -19,6 +20,8 @@ public class DetailsActivity extends AppCompatActivity{
         Intent intent=getIntent();
         detailUrl = intent.getStringExtra("detailUrl");
         mWebView = (WebView) findViewById(R.id.wv_product_detail);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(new WebViewClient());
         //WebView加载详情网址
         mWebView.loadUrl(detailUrl);
     }

@@ -54,11 +54,16 @@ public class RecommendFragment2 extends Fragment{
         laodListViewDatas();
         //对GrideView设置监听
         mRecommendGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            private String pro_url;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(mContext, "1111111111", Toast.LENGTH_SHORT).show();
+                //获取详情页面的URL
+                pro_url = recommendDatas.get(i).getPro_url();
+                //跳转Activity并且将详情页面的URL传过去
                 Intent intent=new Intent();
                 intent.setClass(getActivity(),DetailsActivity.class);
+                intent.putExtra("detailUrl",pro_url);
                 startActivity(intent);
             }
         });

@@ -72,6 +72,7 @@ public class RecommendFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setupListView();
+
     }
     private void setupListView() {
         //2.创建适配器
