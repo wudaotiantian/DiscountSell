@@ -76,6 +76,7 @@ public class FourFragmentRecomment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         gridAdapter=new GridAdapterAll(itemDatas,getActivity());
         gridView.setMode(PullToRefreshBase.Mode.BOTH);
+        gridView.setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
         gridView.setAdapter(gridAdapter);
         //initListener();
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,7 +108,7 @@ public class FourFragmentRecomment extends Fragment {
         gridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
-                refreshView.setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -124,7 +125,7 @@ public class FourFragmentRecomment extends Fragment {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
-                refreshView.setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
