@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ import androidas.com.discountsell.httplibrary.OkHttpTool;
  */
 public class FourFragmentDiscount extends Fragment {
 
-    private GridView gridView;
+    private PullToRefreshGridView gridView;
     final static public String urlStart ="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=";
     final static public String urlEnd="&sort_name=discount&sort=asc&picsize=";
     private String tid;
@@ -45,7 +46,7 @@ public class FourFragmentDiscount extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.four_click_grid_vp,container,false);
-        gridView= (GridView) view.findViewById(R.id.gv_four_grid_vp);
+        gridView= (PullToRefreshGridView) view.findViewById(R.id.gv_four_grid_vp);
         Bundle bundle= getArguments();
         tid=bundle.getString("key");
         itemDatas.clear();

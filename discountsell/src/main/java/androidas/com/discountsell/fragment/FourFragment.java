@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,9 +22,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import androidas.com.discountsell.R;
 import androidas.com.discountsell.adapter.HeaderAdapterV;
@@ -56,7 +60,8 @@ public class FourFragment extends Fragment {
     private Context mContext;
     private RecyclerAdapter recyclerAdapter;
     private View headerView;
-    private RecyclerView recyclerView;
+    private XRecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     public FourFragment() {
@@ -96,9 +101,38 @@ public class FourFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_four, container, false);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_fragment_four);
+        recyclerView = (XRecyclerView) view.findViewById(R.id.rv_fragment_four);
         getRlData();
         getTitleData();
+
+        recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        recyclerView.refreshComplete();
+                    }
+                }, 1000);
+            }
+
+            @Override
+            public void onLoadMore() {
+                for (int i=0;i<3;i++){
+                    if (i==2){
+
+                        return;
+                    }
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            getRlData();
+                          recyclerView.loadMoreComplete();
+                        }
+                    }, 1000);
+                }
+
+
+            }
+        });
         return view;
     }
 
@@ -106,10 +140,10 @@ public class FourFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).size(20).build());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).size(20).build());
         recyclerAdapter=new RecyclerAdapter(items,mContext,mTitle);
-        mRecyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setAdapter(recyclerAdapter);
 
 
     }
@@ -132,7 +166,6 @@ public class FourFragment extends Fragment {
     }
     public void getRlData(){
 
-
         OkHttpTool.newInstance().start(UtlConfig.URL_SALE).callback(new IOKCallBack() {
             @Override
             public void success(String result) {
@@ -141,7 +174,6 @@ public class FourFragment extends Fragment {
                 Log.i("xxxxx","xxxxxxx"+beanSale);
                 items.addAll(beanSale.getData().getListV());
                 recyclerAdapter.notifyDataSetChanged();
-
             }
         });
     }

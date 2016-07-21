@@ -19,15 +19,14 @@
                     android:layout_height="wrap_content"
                      />
         </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_fragment_four"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:scrollbarStyle="outsideInset"
-            android:scrollbarSize="4dp"
-            android:scrollbarThumbVertical="@color/colorRed"
-            />
-
+                <com.jcodecraeer.xrecyclerview.XRecyclerView
+                    android:id="@+id/rv_fragment_four"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:scrollbarStyle="outsideInset"
+                    android:scrollbarSize="4dp"
+                    android:scrollbarThumbVertical="@color/colorRed"
+                    />
 
 </LinearLayout>
