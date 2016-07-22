@@ -11,9 +11,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidas.com.discountsell.FourDetailsActivity;
@@ -32,6 +34,8 @@ public class FourFragmentSalse extends Fragment {
     final static public String urlStart ="http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=channel_goods&channel_num=216&page=1&type_num=";
     final static public String urlEnd="&sort_name=volume&sort=desc&picsize=";
     private String tid;
+    public static List<Long> mList= new ArrayList<>();
+    public static int num=0;
     private List<BeadGridAll.DataBean.ListBean> itemDatas=new ArrayList<>();
     private GridAdapterAll gridAdapter;
     public static FourFragmentSalse newInstance(String tId){
@@ -59,6 +63,7 @@ public class FourFragmentSalse extends Fragment {
         super.onActivityCreated(savedInstanceState);
         gridAdapter=new GridAdapterAll(itemDatas,getActivity());
         gridView.setAdapter(gridAdapter);
+        initListener();
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -69,11 +74,43 @@ public class FourFragmentSalse extends Fragment {
             }
         });
     }
-
+    public void initListener() {
+        gridView.setMode(PullToRefreshBase.Mode.BOTH);
+        gridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<GridView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<GridView> refreshView) {
+                PullToRefreshBase.Mode currentMode = refreshView.getCurrentMode();
+                if (currentMode == PullToRefreshBase.Mode.PULL_FROM_START) {
+                    itemDatas.clear();
+                    gridView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
+                    gridView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+                    gridView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
+                    // gridView.setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("距离上次更新时间：" + friendlyTime(new Date()));
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            londData();
+                            gridView.onRefreshComplete();
+                        }
+                    }, 2000);
+                } else {
+                    //加载更多
+                    gridView.getLoadingLayoutProxy().setRefreshingLabel("正在加载");
+                    gridView.getLoadingLayoutProxy().setPullLabel("上拉加载更多");
+                    gridView.getLoadingLayoutProxy().setReleaseLabel("释放开始加载");
+                    // gridView.setLastUpdatedLabel("距离上次加载时间："+friendlyTime(new Date()));
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("距离上次加载时间：" + friendlyTime(new Date()));
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            londData();
+                            gridView.onRefreshComplete();
+                        }
+                    }, 2000);
+                }
+            }
+        });
+    }
     public void londData(){
-        if (itemDatas!=null&&itemDatas.isEmpty()==false){
-            return;
-        }
         OkHttpTool.newInstance().start(urlStart+tid+urlEnd).callback(new IOKCallBack() {
             @Override
             public void success(String result) {
@@ -83,5 +120,36 @@ public class FourFragmentSalse extends Fragment {
                 gridAdapter.notifyDataSetChanged();
             }
         });
+
+    }
+    public void onDestroyView() {
+        super.onDestroyView();
+        itemDatas.clear();
+    }
+    public static String friendlyTime(Date time) {
+        mList.add(time.getTime());
+        int ct = (int)((mList.get(num) - mList.get(num==0?0:num-1))/1000);
+        num++;
+        if(ct == 0) {
+            return "刚刚";
+        }
+
+        if(ct > 0 && ct < 60) {
+            return +ct + "秒前";
+        }
+
+        if(ct >= 60 && ct < 3600) {
+            return Math.max(ct / 60,1) + "分钟前";
+        }
+        if(ct >= 3600 && ct < 86400)
+            return ct / 3600 + "小时前";
+        if(ct >= 86400 && ct < 2592000){ //86400 * 30
+            int day = ct / 86400 ;
+            return day + "天前";
+        }
+        if(ct >= 2592000 && ct < 31104000) { //86400 * 30
+            return ct / 2592000 + "月前";
+        }
+        return ct / 31104000 + "年前";
     }
 }

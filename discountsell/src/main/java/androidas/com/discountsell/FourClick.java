@@ -8,11 +8,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.BaseKeyListener;
+import android.transition.Transition;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,6 +33,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidas.com.discountsell.adapter.MyListView;
 import androidas.com.discountsell.adapter.MyViewPager;
 import androidas.com.discountsell.fragment.FourFragmentDiscount;
 import androidas.com.discountsell.fragment.FourFragmentNewest;
@@ -42,6 +56,7 @@ public class FourClick extends AppCompatActivity{
     private FragmentTransaction transaction;
     private String name;
     private String tId;
+    private String[]Id={"all_type_goods","27","29","11","26","14","12","8","10","13","33","32"};
     private FragmentManager frag;
     private MyViewPager myViewPager;
     private RadioButton radioRecomment;
@@ -56,11 +71,23 @@ public class FourClick extends AppCompatActivity{
     private FourFragmentDiscount fourFragmentDiscount;
     private FourFragmentNewest fourFragmentNewest;
     private int num=0;
+    private DrawerLayout drawerLayout;
+    private LinearLayout linearLayout;
+    private PopupWindow mPopWindow;
+    private ListView listView;
+    private LinearLayout mLinearLayout;
+    private View rootview;
+    private Animation transtoLeftAnim;
+    private Animation nimation;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.four_click_activity);
         intiView();
+        nimation=AnimationUtils.loadAnimation(FourClick.this,R.anim.ss);
+        showPopupWindow();
         Intent intent=getIntent();
         name=intent.getStringExtra("myKey");
         tId=intent.getStringExtra("myId");
@@ -69,8 +96,77 @@ public class FourClick extends AppCompatActivity{
         getFragmentDate();
         iniAdapter();
         bindAdapter();
+        onClicdd();
         radioRecomment.setChecked(true);
         initClic();
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("androidxx", "onStart: ");
+    }
+
+    private void showPopupWindow() {
+        //设置contentView
+        View contentView = LayoutInflater.from(FourClick.this).inflate(R.layout.layout_four, null);
+        mPopWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        mPopWindow.setContentView(contentView);
+        listView= (ListView) contentView.findViewById(R.id.lv_four_layout);
+        mLinearLayout= (LinearLayout) contentView.findViewById(R.id.ll_four_layout);
+        getTitleData();
+        MyListView myAdapter=new MyListView(mTitle,FourClick.this);
+        listView.setAdapter(myAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent=new Intent(FourClick.this,FourClick.class);
+                intent.putExtra("myKey",mTitle.get(i));
+                intent.putExtra("myId",Id[i]);
+                startActivity(intent);
+                mPopWindow.dismiss();
+            }
+        });
+        mLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopWindow.dismiss();
+            }
+        });
+        rootview = LayoutInflater.from(FourClick.this).inflate(R.layout.four_click_activity, null);
+
+    }
+    public void onClicdd(){
+        imageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        imageTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopWindow.showAsDropDown(findViewById(R.id.rl_four_click_activity));
+               mPopWindow.setAnimationStyle(9);
+
+            }
+        });
+    }
+    public void getTitleData(){
+        mTitle.add("全部");
+        mTitle.add("女装");
+        mTitle.add("男装");
+        mTitle.add("母婴");
+        mTitle.add("美食");
+        mTitle.add("美妆");
+        mTitle.add("鞋包");
+        mTitle.add("数码");
+        mTitle.add("家具");
+        mTitle.add("文体");
+        mTitle.add("配饰");
+        mTitle.add("中老年");
 
 
     }
@@ -118,6 +214,8 @@ public class FourClick extends AppCompatActivity{
     }
 
     public void intiView() {
+        linearLayout= (LinearLayout) findViewById(R.id.ll_four_click_activity);
+        drawerLayout= (DrawerLayout) findViewById(R.id.dl_four_click_activity);
         viewPager= (ViewPager) findViewById(R.id.vp_four_click_activity);
         textView= (TextView) findViewById(R.id.tv_four_click_title);
         radioGroup = (RadioGroup) findViewById(R.id.rg_four_click_activity);
@@ -215,5 +313,6 @@ public class FourClick extends AppCompatActivity{
         }
         getNumber();
     }
+
 }
 

@@ -42,15 +42,9 @@ public class FourFragmentRecomment extends Fragment {
     public static List<Long> mList= new ArrayList<>();
     public static int num=0;
     private List<BeadGridAll.DataBean.ListBean> itemDatas=new ArrayList<>();
+    private List<BeadGridAll.DataBean.ListBean> itemDatas1=new ArrayList<>();
     private GridAdapterAll gridAdapter;
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            //刷新完毕
-            gridView.onRefreshComplete();
-        }
-    };
+
     public static FourFragmentRecomment newInstance(String tId){
         FourFragmentRecomment fourFragmentClick=new FourFragmentRecomment();
         Bundle bundle=new Bundle();
@@ -75,10 +69,10 @@ public class FourFragmentRecomment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         gridAdapter=new GridAdapterAll(itemDatas,getActivity());
-        gridView.setMode(PullToRefreshBase.Mode.BOTH);
-        gridView.setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
+        initListener();
         gridView.setAdapter(gridAdapter);
         //initListener();
+        gridView.getLoadingLayoutProxy().setLastUpdatedLabel("");
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -91,63 +85,78 @@ public class FourFragmentRecomment extends Fragment {
         });
     }
     public void initListener(){
-//        gridView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-//        gridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<GridView>() {
-//            @Override
-//            public void onRefresh(PullToRefreshBase<GridView> refreshView) {
-//                londData();
-//                gridView.onRefreshComplete();
-//            }
-//        });
+        gridView.setMode(PullToRefreshBase.Mode.BOTH);
+        gridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<GridView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<GridView> refreshView) {
+                PullToRefreshBase.Mode currentMode = refreshView.getCurrentMode();
+                if (currentMode == PullToRefreshBase.Mode.PULL_FROM_START) {
+                    itemDatas.clear();
+                    gridView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
+                    gridView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+                    gridView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
+                   // gridView.setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            londData();
+                            gridView.onRefreshComplete();
+                        }
+                    }, 2000);
+                } else {
+                    //加载更多
+                    gridView.getLoadingLayoutProxy().setRefreshingLabel("正在加载");
+                    gridView.getLoadingLayoutProxy().setPullLabel("上拉加载更多");
+                    gridView.getLoadingLayoutProxy().setReleaseLabel("释放开始加载");
+                   // gridView.setLastUpdatedLabel("距离上次加载时间："+friendlyTime(new Date()));
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("距离上次加载时间："+friendlyTime(new Date()));
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            londData();
+                            gridView.onRefreshComplete();
+                        }
+                    }, 2000);
+                }
+            }
+        });
 //        gridView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener(){
 //            @Override
 //            public void onLastItemVisible() {
 //                londData();
 //            }
 //        });
-        gridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(20000);
-                            gridView.onRefreshComplete();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        handler.sendEmptyMessage(0);
-                    }
-                }).start();
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(20000);
-                            londData();
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        handler.sendEmptyMessage(0);
-                    }
-                }).start();
-            }
-        });
+//        gridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+//            @Override
+//            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+//                gridView.setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
+//                new android.os.Handler().postDelayed(new Runnable() {
+//                    public void run() {
+//                        londData();
+//                        gridView.onRefreshComplete();
+//                    }
+//                }, 2000);
+//            }
+//
+//            @Override
+//            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
+//                gridView.setLastUpdatedLabel("距离上次更新时间："+friendlyTime(new Date()));
+//                new android.os.Handler().postDelayed(new Runnable() {
+//                    public void run() {
+//
+//                        londData();
+//                        londData1();
+//
+//                    }
+//                }, 2000);
+//            }
+//        });
 
     }
 
     public void londData(){
-        if (itemDatas!=null&&itemDatas.isEmpty()==false){
-            return;
-        }
+//        if (itemDatas!=null&&itemDatas.isEmpty()==false){
+//            return;
+//        }
         OkHttpTool.newInstance().start(urlStart+tid+urlEnd).callback(new IOKCallBack() {
             @Override
             public void success(String result) {
@@ -157,6 +166,12 @@ public class FourFragmentRecomment extends Fragment {
                 gridAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        itemDatas.clear();
     }
     public static String friendlyTime(Date time) {
         mList.add(time.getTime());

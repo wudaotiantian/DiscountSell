@@ -19,7 +19,9 @@
         <activity android:name=".FourDetailsActivity"></activity>
         <activity android:name=".activity.JumpActivity"></activity>
 
-        <activity android:name=".FourGridActivity"></activity>
+        <activity android:name=".FourGridActivity"
+            >
+        </activity>
 
         <activity android:name=".DetailsActivity"/>
     </application>

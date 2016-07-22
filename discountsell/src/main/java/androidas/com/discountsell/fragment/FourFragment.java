@@ -110,6 +110,7 @@ public class FourFragment extends Fragment {
             public void onRefresh() {
                 new android.os.Handler().postDelayed(new Runnable() {
                     public void run() {
+                        getRlData();
                         recyclerView.refreshComplete();
                     }
                 }, 1000);
