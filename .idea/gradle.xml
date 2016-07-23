@@ -5,7 +5,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="H:\Program Files\Android\Android Studio\gradle\gradle-2.10" />
+        <option name="gradleHome" value="C:\Program Files\Android\Android Studio\gradle\gradle-2.10" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -27,10 +27,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/app1" />
-            <option value="$PROJECT_DIR$/app2" />
             <option value="$PROJECT_DIR$/demo" />
             <option value="$PROJECT_DIR$/discountsell" />
-            <option value="$PROJECT_DIR$/lib" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/mhvp-core" />
             <option value="$PROJECT_DIR$/mhvp-integrated-ptr" />

@@ -1,2 +1,3 @@
 include ':app', ':discountsell', ':mhvp-integrated-ptr', ':mhvp-core', ':demo', ':myapplication', ':app1', ':xrecyclerview', ':app2', ':lib'
+include ':app', ':discountsell', ':mhvp-integrated-ptr', ':mhvp-core', ':demo', ':myapplication',':xrecyclerview'
 include ':library'

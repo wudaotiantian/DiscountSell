@@ -1,10 +1,8 @@
 package androidas.com.discountsell.fragment;
-
-
+import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +23,7 @@ import androidas.com.discountsell.httplibrary.IOKCallBack;
 import androidas.com.discountsell.httplibrary.OkHttpTool;
 
 /**
- * A simple {@link Fragment} subclass.
+ * //A simple {@link Fragment} subclass.
 
  * create an instance of this fragment.
  */

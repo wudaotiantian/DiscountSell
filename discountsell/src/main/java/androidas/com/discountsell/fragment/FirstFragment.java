@@ -1,6 +1,4 @@
 package androidas.com.discountsell.fragment;
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;

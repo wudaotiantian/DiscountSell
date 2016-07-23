@@ -5,7 +5,6 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,11 +76,6 @@ public class MyListViewAdapter extends BaseAdapter{
         TextView productCommissionCent = (TextView) convertView.findViewById(R.id.tv_recommend_jifenbao);
         int commission_cent = mData.get(position).getCommission_cent();
         productCommissionCent.setText("送"+commission_cent+"集分宝");
-        //商品详情的WebView的链接
-        /*WebView productPro_url = (WebView) convertView.findViewById(R.id.wv_product_detail);
-        String pro_url = mData.get(position).getPro_url();
-        //通过详情链接，加载网络数据
-        productPro_url.loadUrl(pro_url);*/
         return convertView;
     }
 }

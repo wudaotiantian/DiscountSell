@@ -3,19 +3,15 @@ package androidas.com.discountsell.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -25,11 +21,9 @@ import java.util.List;
 import androidas.com.discountsell.FourClick;
 import androidas.com.discountsell.FourDetailsActivity;
 import androidas.com.discountsell.FourGridActivity;
-import androidas.com.discountsell.MainActivity;
 import androidas.com.discountsell.R;
 import androidas.com.discountsell.bean.BeanSale;
 import androidas.com.discountsell.canstant.MyGridView;
-import androidas.com.discountsell.fragment.FourFragment;
 
 /**
  * Created by xwb on 2016/7/12.

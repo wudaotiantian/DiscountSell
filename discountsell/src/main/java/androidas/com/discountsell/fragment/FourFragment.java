@@ -1,43 +1,29 @@
 package androidas.com.discountsell.fragment;
-
-
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 import androidas.com.discountsell.R;
-import androidas.com.discountsell.adapter.HeaderAdapterV;
 import androidas.com.discountsell.adapter.RecyclerAdapter;
 import androidas.com.discountsell.bean.BeanSale;
 import androidas.com.discountsell.canstant.UtlConfig;
 import androidas.com.discountsell.httplibrary.IOKCallBack;
 import androidas.com.discountsell.httplibrary.OkHttpTool;
 import androidas.com.discountsell.line.HorizontalDividerItemDecoration;
-import androidas.com.discountsell.line.VerticalDividerItemDecoration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,12 +101,10 @@ public class FourFragment extends Fragment {
                     }
                 }, 1000);
             }
-
             @Override
             public void onLoadMore() {
                 for (int i=0;i<3;i++){
                     if (i==2){
-
                         return;
                     }
                     new android.os.Handler().postDelayed(new Runnable() {
@@ -130,13 +114,10 @@ public class FourFragment extends Fragment {
                         }
                     }, 1000);
                 }
-
-
             }
         });
         return view;
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -145,10 +126,7 @@ public class FourFragment extends Fragment {
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).size(20).build());
         recyclerAdapter=new RecyclerAdapter(items,mContext,mTitle);
         recyclerView.setAdapter(recyclerAdapter);
-
-
     }
-
     public void getTitleData(){
         mTitle.add("全部");
         mTitle.add("女装");
@@ -162,11 +140,8 @@ public class FourFragment extends Fragment {
         mTitle.add("文体");
         mTitle.add("配饰");
         mTitle.add("中老年");
-
-
     }
     public void getRlData(){
-
         OkHttpTool.newInstance().start(UtlConfig.URL_SALE).callback(new IOKCallBack() {
             @Override
             public void success(String result) {
@@ -178,9 +153,4 @@ public class FourFragment extends Fragment {
             }
         });
     }
-
-
-
-
-
 }

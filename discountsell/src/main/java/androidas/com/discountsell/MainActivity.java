@@ -1,8 +1,5 @@
 package androidas.com.discountsell;
-
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,8 +20,8 @@ import androidas.com.discountsell.fragment.ThirdFragment;
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     private RadioGroup rgp;
 
-    private FragmentManager manager;
-    private FragmentTransaction transaction;
+    private android.support.v4.app.FragmentManager manager;
+    private android.support.v4.app.FragmentTransaction transaction;
     private SecondFragment newFragment;
     private FirstFragment storyFragment;
     private ThirdFragment spFragment;

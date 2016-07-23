@@ -1,8 +1,9 @@
 package androidas.com.discountsell.fragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,8 +14,11 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidas.com.discountsell.DetailsActivity;
@@ -24,21 +28,27 @@ import androidas.com.discountsell.bean.RecommendInfo;
 import androidas.com.discountsell.canstant.UtlConfig;
 import androidas.com.discountsell.httplibrary.IOKCallBack;
 import androidas.com.discountsell.httplibrary.OkHttpTool;
-
 /**
  * Created by my on 2016/7/18.
  * 19.9包邮-推荐界面
  */
-public class RecommendFragment2 extends Fragment{
-    private GridView mRecommendGridView;
-    private List<RecommendInfo.DataBean.ListBean> recommendDatas=new ArrayList<>();
+public class RecommendFragment2 extends Fragment {
+    private PullToRefreshGridView mRecommendGridView;
+    private List<RecommendInfo.DataBean.ListBean> recommendDatas=new ArrayList<>();//网络请求数据集合
+    private static List<Long>timeList=new ArrayList<>();//刷新时间集合
     private MyListViewAdapter adapter;
     private Context mContext;
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mRecommendGridView.onRefreshComplete();
+        }
+    };
     public static RecommendFragment2 newInstance() {
         RecommendFragment2 fragment = new RecommendFragment2();
         return fragment;
     }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,22 +59,65 @@ public class RecommendFragment2 extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recommend2, container, false);
         //获取ListView视图
-        mRecommendGridView= (GridView) view.findViewById(R.id.gv_recommend2);
+        mRecommendGridView= (PullToRefreshGridView) view.findViewById(R.id.gv_recommend2);
         //加载网络数据
+        recommendDatas.clear();
         laodListViewDatas();
         //对GrideView设置监听
         mRecommendGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            private String title;
             private String pro_url;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(mContext, "1111111111", Toast.LENGTH_SHORT).show();
                 //获取详情页面的URL
                 pro_url = recommendDatas.get(i).getPro_url();
+                //获取详情页面的商品名
+                title = recommendDatas.get(i).getTitle();
                 //跳转Activity并且将详情页面的URL传过去
                 Intent intent=new Intent();
                 intent.setClass(getActivity(),DetailsActivity.class);
                 intent.putExtra("detailUrl",pro_url);
+                intent.putExtra("detailTitle",title);
                 startActivity(intent);
+            }
+        });
+        //设置视图刷新，加载
+        mRecommendGridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+                //加载更多
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                            mRecommendGridView.onRefreshComplete();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+                //给主线程发消息
+                handler.sendEmptyMessage(0);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
+                //上拉刷新
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                            //刷新加载
+                            laodListViewDatas();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }).start();
             }
         });
         return view;
@@ -81,7 +134,6 @@ public class RecommendFragment2 extends Fragment{
         //3.关联适配器
         mRecommendGridView.setAdapter(adapter);
     }
-
     private void laodListViewDatas() {
         OkHttpTool.newInstance().start(UtlConfig.THIRD_PAGE_RECOMMEND_URL).callback(new IOKCallBack() {
             @Override

@@ -17,7 +17,7 @@ import com.culiu.mhvp.core.OuterScroller;
  *
  * @date 2015.11.12 11:20
  */
-public abstract class AbsDemoFragment extends Fragment implements InnerScrollerContainer{
+public abstract class AbsDemoFragment extends Fragment implements InnerScrollerContainer {
 
     /************* InnerScrollerContainer interface **************/
 

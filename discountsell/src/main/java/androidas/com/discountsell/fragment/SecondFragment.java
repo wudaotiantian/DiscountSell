@@ -1,5 +1,6 @@
 package androidas.com.discountsell.fragment;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -36,19 +37,24 @@ public class SecondFragment extends Fragment {
     private PopupWindow popupWindow;
     private RelativeLayout relativeLayout;
     //popupWindow里面的数据
-    Map<String,List<String>>map=new HashMap<>();
-    List<String>allList=new ArrayList<>();//全部item
-    List<String>nvzhuangList=new ArrayList<>();//女装item
-    List<String>nanzhuangList=new ArrayList<>();//男装item
-    List<String>muyingList=new ArrayList<>();//母婴item
-    List<String>meishiList=new ArrayList<>();//美食item
-    List<String>meizhuangList=new ArrayList<>();//美妆item
-    List<String>xiebaoList=new ArrayList<>();//鞋包item
-    List<String>shumaList=new ArrayList<>();//数码item
-    List<String>jiajuList=new ArrayList<>();//家居item
-    List<String>wenbenList=new ArrayList<>();//文本item
-    List<String>peishiList=new ArrayList<>();//配饰item
-    List<String>zhonglaonianList=new ArrayList<>();//中老年item
+    public static final String[]firstData=new String[]{
+            "全部","女装","男装","母婴","美食","美妆","鞋包","数码","家居","文本","配饰","中老年"
+    };
+    public static final Map<String,String[]>map=new HashMap<>();
+    static {
+        map.put("全部",new String[]{});
+        map.put("女装",new String[]{"全部","连衣裙","上衣","防晒衣","半身裙","套装","裤装","睡衣","内衣/袜子","针织衫"});
+        map.put("男装",new String[]{"全部","上衣","裤装","套装","睡衣","内衣/袜子"});
+        map.put("母婴",new String[]{"全部","童装","童鞋","婴幼用品","玩具/早教","孕妈必备","婴幼服饰"});
+        map.put("美食",new String[]{"全部","休闲食品","油粮干货","饮料冲调","营养保健","果蔬生鲜","茶酒"});
+        map.put("美妆",new String[]{"全部","彩妆香氛","美甲美发","美容护肤","其他/工具"});
+        map.put("鞋包",new String[]{"全部","女鞋","男鞋","女包","男包","家居鞋","功能箱包"});
+        map.put("数码",new String[]{"全部","手机周边","电脑配件","生活电器","保健器材"});
+        map.put("家居",new String[]{"全部","温馨家纺","厨房烹饪","居家百货","家居饰品","家具/建材","整理收纳","水杯"});
+        map.put("文本",new String[]{"全部","办公|学习","户外用品","有车族","运动健身","宠物专区","其它"});
+        map.put("配饰",new String[]{"全部","服装配饰","精品首饰","其它配饰","精美手表"});
+        map.put("中老年",new String[]{"全部","服装","鞋子","其他"});
+    }
     //单例模式
     public static SecondFragment newInstance() {
         SecondFragment fragment = new SecondFragment();
@@ -89,6 +95,17 @@ public class SecondFragment extends Fragment {
                 popupWindow = new PopupWindow(mContext);
                 //填充内容
                 popupWindow.setContentView(contentView);
+                //点击popupWindow之外的空白处，popupWindow消失
+                /*popupWindow.setTouchable(true);
+                popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        return false;
+                    }
+                });*/
+                popupWindow.setOutsideTouchable(true);
+                //设置背景
+                popupWindow.setBackgroundDrawable(new BitmapDrawable());
                 //在下方显示
                 popupWindow.showAsDropDown(relativeLayout);
             }
@@ -114,18 +131,6 @@ public class SecondFragment extends Fragment {
         fragments.add(PriceFragment.newInstance());
         fragments.add(RebateFragment.newInstance());
         fragments.add(NewestFragment.newInstance());
-        //往popupWindow里面的List填充值
-        map.put("全部",allList);
-        map.put("女装",nvzhuangList);
-        map.put("",nanzhuangList);
-        map.put("全部",muyingList);
-        map.put("全部",meishiList);
-        map.put("全部",meizhuangList);
-        map.put("全部",xiebaoList);
-        map.put("全部",shumaList);
-        map.put("全部",jiajuList);
-        map.put("全部",wenbenList);
-        map.put("全部",allList);
     }
     /**
      * 初始化视图

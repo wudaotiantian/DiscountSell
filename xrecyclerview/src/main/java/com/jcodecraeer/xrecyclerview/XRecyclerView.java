@@ -1,9 +1,6 @@
 package com.jcodecraeer.xrecyclerview;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.icu.text.SimpleDateFormat;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class XRecyclerView extends RecyclerView {

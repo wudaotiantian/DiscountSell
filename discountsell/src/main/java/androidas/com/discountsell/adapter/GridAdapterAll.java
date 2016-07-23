@@ -17,7 +17,6 @@ import java.util.List;
 
 import androidas.com.discountsell.R;
 import androidas.com.discountsell.bean.BeadGridAll;
-import androidas.com.discountsell.bean.BeadTitle;
 
 /**
  * Created by xwb on 2016/7/16.

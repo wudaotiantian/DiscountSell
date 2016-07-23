@@ -1,8 +1,9 @@
 package androidas.com.discountsell.fragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +32,18 @@ import androidas.com.discountsell.httplibrary.OkHttpTool;
  * Created by my on 2016/7/18.
  * 19.9包邮-最新界面
  */
-public class NewestFragment2 extends Fragment{
-    private GridView mRecommendGridView;
+public class NewestFragment2 extends Fragment {
+    private PullToRefreshGridView mRecommendGridView;
     private List<RecommendInfo.DataBean.ListBean> recommendDatas=new ArrayList<>();
     private MyListViewAdapter adapter;
     private Context mContext;
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mRecommendGridView.onRefreshComplete();
+        }
+    };
     public static NewestFragment2 newInstance() {
         NewestFragment2 fragment = new NewestFragment2();
         return fragment;
@@ -48,17 +58,58 @@ public class NewestFragment2 extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recommend, container, false);
         //获取ListView视图
-        mRecommendGridView= (GridView) view.findViewById(R.id.gv_recommend);
+        mRecommendGridView= (PullToRefreshGridView) view.findViewById(R.id.gv_recommend);
         //加载网络数据
         laodListViewDatas();
         //对GrideView设置监听
         mRecommendGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            private String title;
+            private String pro_url;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(mContext, "1111111111", Toast.LENGTH_SHORT).show();
+                //获取详情页面的URL
+                pro_url = recommendDatas.get(i).getPro_url();
+                //获取详情页面的商品名
+                title = recommendDatas.get(i).getTitle();
+                //跳转Activity并且将详情页面的URL传过去
                 Intent intent=new Intent();
                 intent.setClass(getActivity(),DetailsActivity.class);
+                intent.putExtra("detailUrl",pro_url);
+                intent.putExtra("detailTitle",title);
                 startActivity(intent);
+            }
+        });
+        //设置加载刷新
+        mRecommendGridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+                //加载
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                            laodListViewDatas();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
             }
         });
         return view;

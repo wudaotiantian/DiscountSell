@@ -1,6 +1,4 @@
 package androidas.com.discountsell;
-
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -40,11 +38,10 @@ import androidas.com.discountsell.fragment.FourFragmentNewest;
 import androidas.com.discountsell.fragment.FourFragmentPrice;
 import androidas.com.discountsell.fragment.FourFragmentRecomment;
 import androidas.com.discountsell.fragment.FourFragmentSalse;
-
 /**
  * Created by xwb on 2016/7/14.
  */
-public class FourClick extends AppCompatActivity{
+public class FourClick extends AppCompatActivity {
 
     private GridView gridView;
     private TextView textView;

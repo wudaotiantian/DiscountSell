@@ -26,7 +26,7 @@ public class JumpActivity extends AppCompatActivity {
     private TextView tv1;
     private TextView tv2;
     private String id;
-private TabLayout tabLayout;
+    private TabLayout tabLayout;
     private ViewPager viewPager;
     private String[] mContents;
     private GridFragmentAdapter adapter;
