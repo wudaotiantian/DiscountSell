@@ -125,6 +125,7 @@ public class FourClick extends AppCompatActivity{
                 Intent intent=new Intent(FourClick.this,FourClick.class);
                 intent.putExtra("myKey",mTitle.get(i));
                 intent.putExtra("myId",Id[i]);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 mPopWindow.dismiss();
             }
