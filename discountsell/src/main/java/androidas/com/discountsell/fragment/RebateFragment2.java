@@ -18,6 +18,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidas.com.discountsell.DetailsActivity;
@@ -35,6 +36,8 @@ import androidas.com.discountsell.httplibrary.OkHttpTool;
 public class RebateFragment2 extends Fragment {
     private PullToRefreshGridView mRecommendGridView;
     private List<RecommendInfo.DataBean.ListBean> recommendDatas=new ArrayList<>();
+    private static List<Long>timeList=new ArrayList<>();//刷新时间集合
+    private static int num;
     private MyListViewAdapter adapter;
     private Context mContext;
     Handler handler=new Handler(){
@@ -82,36 +85,44 @@ public class RebateFragment2 extends Fragment {
             }
         });
         //设置刷新加载
-        mRecommendGridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+        mRecommendGridView.setMode(PullToRefreshBase.Mode.BOTH);
+        mRecommendGridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<GridView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
-                //加载
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(2000);
-                            mRecommendGridView.onRefreshComplete();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(2000);
+            public void onRefresh(PullToRefreshBase<GridView> refreshView) {
+                PullToRefreshBase.Mode currentMode = refreshView.getCurrentMode();
+                //刷新界面
+                if (currentMode== PullToRefreshBase.Mode.PULL_FROM_START){
+                    //数据清理
+                    recommendDatas.clear();
+                    mRecommendGridView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
+                    mRecommendGridView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+                    mRecommendGridView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("距离上次刷新时间"+friendlyTime(new Date()));
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //加载数据
                             laodListViewDatas();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            //刷新完毕
+                            mRecommendGridView.onRefreshComplete();
                         }
-                    }
-                }).start();
+                    },2000);
+                }else{
+                    //加载更多
+                    mRecommendGridView.getLoadingLayoutProxy().setRefreshingLabel("正在加载");
+                    mRecommendGridView.getLoadingLayoutProxy().setPullLabel("上拉加载更多");
+                    mRecommendGridView.getLoadingLayoutProxy().setReleaseLabel("释放开始加载");
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("距离上次加载时间"+friendlyTime(new Date()));
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //加载数据
+                            laodListViewDatas();
+                            //刷新完毕
+                            mRecommendGridView.onRefreshComplete();
+                        }
+                    },2000);
+                }
             }
         });
         return view;
@@ -139,5 +150,43 @@ public class RebateFragment2 extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        recommendDatas.clear();
+    }
+
+    public static String friendlyTime(Date time){
+        timeList.add(time.getTime());//从网络获取目前时间
+        int currentTime = (int) ((timeList.get(num) - timeList.get(num == 0 ? 0 : num - 1)) / 1000);
+        num++;
+        //判断年月日时分秒
+        if (currentTime == 0) {
+            return "刚刚";
+        }
+        if (0<currentTime&&currentTime<60) {
+            return currentTime/60+"分"
+                    +currentTime%60+"秒前";
+        }
+        if (60<=currentTime&&currentTime<3600) {
+            return currentTime/3600+"小时"
+                    +(currentTime%3600)/60+"分"
+                    +currentTime%60+"秒前";
+        }
+        if (3600<=currentTime&&currentTime<86400) {
+            return currentTime/86400+"天"
+                    +(currentTime%86400)/3600 +"小时"
+                    +((currentTime%86400)%3600)/60+"分"
+                    +currentTime%86400+"秒前";
+        }
+        if (0<currentTime&&currentTime<60) {
+            return currentTime+"秒前";
+        }
+        if (0<currentTime&&currentTime<60) {
+            return currentTime+"秒前";
+        }
+        return currentTime/259200+"月";
     }
 }

@@ -86,45 +86,44 @@ public class RecommendFragment extends Fragment {
             }
         });
         //设置上拉加载更多，下拉刷新
-        mRecommendGridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+        mRecommendGridView.setMode(PullToRefreshBase.Mode.BOTH);
+        mRecommendGridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<GridView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
-                //下拉刷新
-                //子线程操作耗时刷新任务
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //刷新视图
-                        try {
-                            Thread.sleep(2000);
-                            //刷新视图完毕
-                            mRecommendGridView.onRefreshComplete();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        //给主线程发送消息，参数0表示立即发送，不延迟
-                        handler.sendEmptyMessage(0);
-                    }
-                }).start();
-            }
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
-                //上拉加载
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //加载更多任务
-                        try {
-                            Thread.sleep(2000);
-                            //加载后续网址
+            public void onRefresh(PullToRefreshBase<GridView> refreshView) {
+                PullToRefreshBase.Mode currentMode = refreshView.getCurrentMode();
+                //刷新界面
+                if (currentMode== PullToRefreshBase.Mode.PULL_FROM_START){
+                    //数据清理
+                    recommendDatas.clear();
+                    mRecommendGridView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
+                    mRecommendGridView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+                    mRecommendGridView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("距离上次刷新时间"+friendlyTime(new Date()));
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //加载数据
                             laodListViewDatas();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            //刷新完毕
+                            mRecommendGridView.onRefreshComplete();
                         }
-                        //给主线程发消息
-                        handler.sendEmptyMessage(0);
-                    }
-                }).start();
+                    },2000);
+                }else{
+                    //加载更多
+                    mRecommendGridView.getLoadingLayoutProxy().setRefreshingLabel("正在加载");
+                    mRecommendGridView.getLoadingLayoutProxy().setPullLabel("上拉加载更多");
+                    mRecommendGridView.getLoadingLayoutProxy().setReleaseLabel("释放开始加载");
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("距离上次加载时间"+friendlyTime(new Date()));
+                    new android.os.Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //加载数据
+                            laodListViewDatas();
+                            //刷新完毕
+                            mRecommendGridView.onRefreshComplete();
+                        }
+                    },2000);
+                }
             }
         });
         return view;

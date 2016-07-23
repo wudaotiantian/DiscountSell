@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidas.com.discountsell.R;
+import androidas.com.discountsell.adapter.MyListView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,11 +35,14 @@ public class ThirdFragment extends Fragment {
     private ViewPager mViewPager;
     private List<Fragment> fragments=new ArrayList<>();//Fragment集合
     private List<String> mTitleDatas=new ArrayList<>();//Tab标题集合
+    private List<String> mPopDatas=new ArrayList<>();//pop标题集合
     private MyFragmentPagerAdapter mFragmentPagerAdapter;
     private Context mContext;
     private ImageView mImageView;
     private RelativeLayout relativeLayout;
     private PopupWindow popupWindow;
+    private ListView popListView;
+    private LinearLayout popLayout;
     //popupWindow里面的数据
     public static final String[]firstData=new String[]{
             "全部","女装","男装","母婴","美食","美妆","鞋包","数码","家居","文本","配饰","中老年"
@@ -92,11 +98,21 @@ public class ThirdFragment extends Fragment {
                 //弹出窗口布局
                 View contentView = LayoutInflater.from(mContext).inflate(R.layout.fragment_freepost_popupwindow, null);
                 //创建窗口布局
-                popupWindow = new PopupWindow(mContext);
+                popupWindow = new PopupWindow(contentView,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT,true);
                 //填充内容
                 popupWindow.setContentView(contentView);
+                popListView = (ListView) contentView.findViewById(R.id.lv_popupwindow_left);
+                popLayout = (LinearLayout) contentView.findViewById(R.id.ll_pop);
+                MyListView mAdapter=new MyListView(mPopDatas,mContext);
+                popListView.setAdapter(mAdapter);
                 //在下方显示
                 popupWindow.showAsDropDown(relativeLayout);
+                popLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popupWindow.dismiss();
+                    }
+                });
             }
         });
         return view;
@@ -111,6 +127,19 @@ public class ThirdFragment extends Fragment {
         mTitleDatas.add("价格");
         mTitleDatas.add("折扣");
         mTitleDatas.add("最新");
+
+        mPopDatas.add("全部");
+        mPopDatas.add("女装");
+        mPopDatas.add("男装");
+        mPopDatas.add("母婴");
+        mPopDatas.add("美食");
+        mPopDatas.add("美妆");
+        mPopDatas.add("鞋包");
+        mPopDatas.add("数码");
+        mPopDatas.add("家居");
+        mPopDatas.add("文本");
+        mPopDatas.add("配饰");
+        mPopDatas.add("中老年");
     }
 
     /**
