@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="androidas.com.discountsell">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FourClick" />
+        <activity android:name=".FourDetailsActivity" />
+        <activity android:name=".activity.JumpActivity" />
+        <activity android:name=".FourGridActivity" />
+        <activity android:name=".DetailsActivity" />
+        <activity android:name=".activity.SearchActivity"
+            ></activity>
         <activity android:name=".FourClick"></activity>
         <activity android:name=".FourDetailsActivity"></activity>
         <activity android:name=".activity.JumpActivity"></activity>
@@ -25,4 +34,5 @@
 
         <activity android:name=".DetailsActivity"/>
     </application>
+
 </manifest>

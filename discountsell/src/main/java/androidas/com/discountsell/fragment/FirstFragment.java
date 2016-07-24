@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ import java.util.List;
 
 import androidas.com.discountsell.R;
 import androidas.com.discountsell.activity.JumpActivity;
+import androidas.com.discountsell.activity.SearchActivity;
 import androidas.com.discountsell.adapter.DemoPagerAdapter;
 import androidas.com.discountsell.bean.FirstPageBean;
 import androidas.com.discountsell.constants.UrlData;
@@ -100,7 +102,16 @@ private int i;
                              Bundle savedInstanceState) {
 
        View view = inflater.inflate(R.layout.fragment_first, container, false);
+EditText editText = (EditText) view.findViewById(R.id.search_edittext);
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                startActivity(intent);
+                //overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 
+            }
+        });
         mMagicHeaderViewPager = new MagicHeaderViewPager(getContext()) {
             @Override
             protected void initTabsArea(LinearLayout container) {
@@ -206,8 +217,8 @@ headerViewHolder.gridView.setAdapter(hotAdapter);
                 String title = gridList.get(i).getTitle();
                 String id = gridList.get(i).getId();
 
-                intent.putExtra("key",title);
-                intent.putExtra("id",id);
+                intent.putExtra("key1",title);
+                intent.putExtra("key",id);
                 startActivity(intent);
             }
         });

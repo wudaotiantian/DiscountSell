@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="androidas.com.discountsell.activity.SearchActivity">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/ll_1"
+        android:background="#e34a3e"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/log_bac"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"/>
+
+        <EditText
+
+            android:drawablePadding="5dp"
+            android:paddingLeft="5dp"
+            android:drawableLeft="@drawable/index_icon_search"
+            android:textColorHint="#d86b5d"
+            android:hint="输入或粘贴淘宝商品标题"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/text_cancel"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_edit"
+            android:id="@+id/search_1"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@+id/log_bac"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/text_cancel"
+            android:layout_alignParentRight="true"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll_2"
+        android:layout_below="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <androidas.com.discountsell.bean.FlowLayout
+           android:layout_marginTop="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+android:background="@drawable/float_item"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="#9d9d9d"
+                android:text="潮流"/>
+            <Button
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/float_item"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="#9d9d9d"
+                android:text="拼图"/>/>
+            <Button
+                android:background="@drawable/float_item"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="#9d9d9d"
+                android:text="女包"/>/>
+            <Button
+                android:background="@drawable/float_item"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="#9d9d9d"
+                android:text="牛仔短裤"/>/>
+            <Button
+                android:background="@drawable/float_item"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="#9d9d9d"
+                android:text="风扇"/>/>
+            <Button
+                android:background="@drawable/float_item"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="#9d9d9d"
+                android:text="牛仔裤"/>/>
+        </androidas.com.discountsell.bean.FlowLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/history_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="历史记录"
+        android:textColor="#9d9d9d"
+        android:layout_below="@+id/ll_2"
+
+        />
+    <ListView
+        android:id="@+id/lv_sql"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/history_text"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"></ListView>
+    <Button
+android:id="@+id/all_cancel_btn"
+        android:layout_marginBottom="10dp"
+        android:onClick="click"
+        android:textColor="#9d9d9d"
+        android:textSize="20sp"
+        android:background="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="清除所有记录"/>
+</RelativeLayout>

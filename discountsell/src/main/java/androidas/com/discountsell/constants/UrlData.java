@@ -8,6 +8,11 @@ public class UrlData {
     public static final String FIRSTPAGE_URL = "http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=other&op=collection&ac=index_page&sort_name=&sort=desc&flag=instation&page=";
         //同上，为第一个页面广告下面的8个点击之后的界面
     public static final String FIRSTGRID_URL = "http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=type_goods_list&type_num=27&page=1&sort_name=&sort=desc&picsize=";
+    public static final String GRID_URL1 = "http://appcdn.1zhe.com/android/index_bak.php?v=2.3.5&m=goods&op=index&ac=type_goods_list&type_num=";
+    public static final String GRID_URL2 = "&page=";
+    public static final String GRID_URL3 = "&sort_name=";
+    public static final String GRID_URL4 = "&sort=desc&picsize=";
+    public static final String GRID_URLOTH = "&sort=asc&picsize=";
 
 
 }

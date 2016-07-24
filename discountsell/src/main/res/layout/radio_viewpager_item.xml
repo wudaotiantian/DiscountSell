@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
     <RadioGroup
         android:orientation="horizontal"
-        android:layout_below="@+id/fir_hor_scroll"
         android:id="@+id/fir_grid_rg"
         android:background="@drawable/tab_shape"
         android:layout_marginLeft="10dp"

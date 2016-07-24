@@ -22,7 +22,6 @@
         android:src="@drawable/index_logo"/>
 
     <EditText
-        android:enabled="false"
         android:autoText="true"
         android:cursorVisible="false"
         android:drawablePadding="5dp"

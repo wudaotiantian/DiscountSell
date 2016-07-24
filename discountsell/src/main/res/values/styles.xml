@@ -16,5 +16,18 @@
         <item name="android:textColor">@color/selecter_radio_textcolor</item>
 
     </style>e>
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <!-- 指定显示的动画xml -->
+
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+        <!-- 指定消失的动画xml -->
+    </style>
+    <style name="AnimationActivity" parent="@android:style/Animation.Activity" type="text/css"><item name="android:activityOpenEnterAnimation">@anim/push_left_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/push_right_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/push_right_out</item></style>
+
+    <style name="themeSetting" type="text/css"><item name="android:windowAnimationStyle">@style/AnimationActivity</item></style>
 
 </resources>

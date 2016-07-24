@@ -66,25 +66,106 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/btn_list_2x" />
     </RelativeLayout>
-    <android.support.design.widget.TabLayout
-        app:tabSelectedTextColor="#ff8830"
-        app:tabMode="scrollable"
-        android:id="@+id/fir_hor_scroll"
-        android:layout_below="@+id/toorbar_grid_rl"
+    <View
+        android:layout_below="@id/toorbar_grid_rl"
+        android:id="@+id/main_div_line"
         android:layout_width="match_parent"
-        app:tabTextColor="#787878"
-  app:tabMinWidth="100dp"
-        app:tabIndicatorColor="#f58b3d"
+        android:layout_height="1dp"
+        android:background="@color/div_gray"/>
+    <RadioGroup
+        android:layout_below="@+id/toorbar_grid_rl"
+        android:id="@+id/rg1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="50dp">
+        <RadioButton
+            android:gravity="center"
+            android:button="@null"
+            android:onClick="onClick"
+            android:id="@+id/rb_1"
+            android:text="推荐"
+            android:textColor="@color/selecter_radio_textcolor"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:background="#bfbfbf"
+            android:layout_width="2dp"
+            android:layout_height="25dp"></RelativeLayout>
+        <RadioButton
 
+            android:onClick="onClick"
+            android:gravity="center"
+            android:button="@null"
+            android:id="@+id/rb_2"
+            android:text="销量"
+            android:textColor="@color/selecter_radio_textcolor"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:background="#bfbfbf"
+            android:layout_width="2dp"
+            android:layout_height="25dp"></RelativeLayout>
+        <RadioButton
+            android:drawableRight="@drawable/ass"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:button="@null"
+            android:id="@+id/rb_3"
+            android:padding="10dp"
+            android:text="价格"
+            android:textColor="@color/selecter_radio_textcolor"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:background="#bfbfbf"
+            android:layout_width="2dp"
+            android:layout_height="25dp"></RelativeLayout>
+        <RadioButton
+            android:onClick="onClick"
+            android:gravity="center"
+            android:button="@null"
+            android:id="@+id/rb_4"
+            android:text="折扣"
+            android:textColor="@color/selecter_radio_textcolor"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:background="#bfbfbf"
+            android:layout_width="2dp"
+            android:layout_height="25dp"></RelativeLayout>
+        <RadioButton
+            android:onClick="onClick"
+            android:gravity="center"
+            android:button="@null"
+            android:id="@+id/rb_5"
+            android:text="最新"
+            android:textColor="@color/selecter_radio_textcolor"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
 
-
-    </android.support.design.widget.TabLayout>
-<RelativeLayout
+    </RadioGroup>
+<android.support.v4.view.ViewPager
     android:layout_marginTop="5dp"
     android:id="@+id/radio_viewpager_rl"
-    android:layout_below="@+id/fir_hor_scroll"
+    android:layout_below="@+id/rg1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"></RelativeLayout>
-
+    android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+    <View
+        android:layout_below="@+id/toorbar_grid_rl"
+        android:id="@+id/main_darkview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80808080"
+        android:visibility="gone" />
 </RelativeLayout>

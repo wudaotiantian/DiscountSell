@@ -1,3 +1,5 @@
+include ':app', ':discountsell', ':mhvp-integrated-ptr', ':mhvp-core', ':demo'
+include ':app', ':discountsell', ':mhvp-integrated-ptr', ':mhvp-core', ':demo', ':xrecyclerview'
 include ':app', ':discountsell', ':mhvp-integrated-ptr', ':mhvp-core', ':demo', ':myapplication', ':xrecyclerview', ':app2', ':lib'
 include ':xrecyclerview'
 include ':library'
