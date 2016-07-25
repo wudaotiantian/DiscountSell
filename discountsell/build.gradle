@@ -20,12 +20,12 @@ android {
 }
 
 dependencies {
+    compile project(':xrecyclerview')
     compile 'com.github.razerdp:BasePopup:v1.1.7'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':mhvp-core')
     compile project(':mhvp-integrated-ptr')
-    compile project(':xrecyclerview')
     compile project(':library')
     compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:design:24.0.0'
@@ -42,5 +42,4 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     compile project(':xrecyclerview')
     compile project(':library')
-
 }
