@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -40,6 +41,20 @@ public class SearchActivity extends AppCompatActivity {
         adapter = new SimpleCursorAdapter(SearchActivity.this,R.layout.item_sql,cursor, new String[]{DbConstant.COLUMN_NAME_NAME},
                 new int[]{R.id.tv_sql},SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView tvLoc= (TextView) view.findViewById(android.R.id.text1);
+
+               // String text = (String) ((TextView) view.).getText();
+                Log.i("text11", "onItemClick: "+tvLoc);
+                Cursor cursor = (Cursor) adapter.getItem(i);
+                Intent intent = new Intent(SearchActivity.this, Search2Activity.class);
+                intent.putExtra("key", cursor.getString(cursor
+                        .getColumnIndex("name")));
+                startActivity(intent);
+            }
+        });
         initListenner();
     }
 
@@ -72,5 +87,12 @@ public class SearchActivity extends AppCompatActivity {
         et = (EditText) findViewById(R.id.search_1);
         lv = (ListView) findViewById(R.id.lv_sql);
         btn = (Button)findViewById(R.id.all_cancel_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 }

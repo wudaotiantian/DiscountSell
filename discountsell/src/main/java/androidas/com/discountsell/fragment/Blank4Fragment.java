@@ -1,64 +1,117 @@
 package androidas.com.discountsell.fragment;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.culiu.mhvp.core.MagicHeaderUtils;
+import com.culiu.mhvp.core.tabs.GridViewWithHeaderBaseAdapter;
+
+import java.util.ArrayList;
 
 import androidas.com.discountsell.R;
+import androidas.com.discountsell.bean.FirstPageBean;
 
 /**
  * //A simple {@link Fragment} subclass.
- * Use the {@link Blank4Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class Blank4Fragment extends ListFragment {
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
     public Blank4Fragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Blank4Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Blank4Fragment newInstance(String param1, String param2) {
-        Blank4Fragment fragment = new Blank4Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    protected void initAdapter() {
+        if (mListSomes == null) {
+            mListSomes = new ArrayList<>();
         }
+        mAdapter = new GridViewWithHeaderBaseAdapter(getActivity()) {
+            @Override
+            protected void setPaddingAndMargin(View leftView, View rightView, int culumn) {
+                super.setPaddingAndMargin(leftView, rightView, culumn);
+                int _5dp = MagicHeaderUtils.dp2px(getActivity(), 15f);
+                leftView.setPadding(_5dp, 0, _5dp / 2, 0);
+                rightView.setPadding(_5dp / 2, 0, _5dp, 0);
+            }
+
+            @Override
+            public int getItemCount() {
+                return mListSomes.size();
+
+            }
+
+            @Override
+            protected View getItemView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(getActivity()).inflate(R.layout.blank1_fragment_item, null);
+                }
+                Log.i("tag2", "success: "+mListSomes);
+
+                ImageView iv = (ImageView) convertView.findViewById(R.id.blak1_fragment_imageview);
+                TextView tv1 = (TextView) convertView.findViewById(R.id.blank1_fragment_title_textview);
+                TextView tv2 = (TextView) convertView.findViewById(R.id.blank1_fragment_price_textview);
+                TextView tv3 = (TextView) convertView.findViewById(R.id.small_price_line_textview);
+                TextView tv4 = (TextView) convertView.findViewById(R.id.blank1_fragment_tianmao_taobao_textview);
+                TextView tv5 = (TextView) convertView.findViewById(R.id.provide_math_textview);
+                RelativeLayout relativeLayout = (RelativeLayout) convertView.findViewById(R.id.paixia_relativelayout);
+                ImageView iv2 = (ImageView) convertView.findViewById(R.id.icon_taobao_tianmao_imageview);
+                View line = (View)convertView.findViewById(R.id.small_price_line);
+                tv1.setText(mListSomes.get(position).getTitle());
+                tv2.setText(getNewNamble(mListSomes.get(position).getPromotion_price())+"");
+                tv3.setText(getNewNamble(mListSomes.get(position).getPrice())+"");
+                tv5.setText(mListSomes.get(position).getCommission_cent()+"");
+                if(mListSomes.get(position).getApp_isrec().equals("1")){
+                    relativeLayout.setVisibility(View.VISIBLE);
+                    line.setVisibility(View.GONE);
+                }
+                Glide.with(getContext()).load(mListSomes.get(position).getPic()).into(iv);
+                if(mListSomes.get(position).getSite().equals("天猫")){
+                    tv4.setText("天猫");
+                    iv2.setImageResource(R.drawable.icon_tianmao);
+                }else{
+                    tv4.setText("淘宝");
+                    iv2.setImageResource(R.drawable.icon_taobao);
+                }
+//                TextView tv = (TextView) convertView.findViewById(R.id.tv);
+//                iv.setImageResource(getItem(position).getDrawableResId());
+//                tv.setText(getItem(position).getTitle());
+                return convertView;
+            }
+
+            @Override
+            public FirstPageBean.DataBean.IndexHomeBean.ListBean getItem(int position) {
+                return mListSomes.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+        };
+        ((GridViewWithHeaderBaseAdapter) mAdapter).setNumColumns(2);
+        mListView.setAdapter(mAdapter);
+    }
+    public String getNewNamble(double namble){
+        String newNamble = null;
+        String s = String.valueOf(namble);
+
+        if(s.substring(s.indexOf(".")+1,s.indexOf(".")+2).equals("0")){
+            Log.i("xxxx",""+s.indexOf("."));
+            newNamble = s.substring(0,s.indexOf("."));
+        }else {
+            newNamble=s.substring(0,s.indexOf(".")+2);
+        }
+        return newNamble;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank4, container, false);
-    }
+
+
+
 
 }
